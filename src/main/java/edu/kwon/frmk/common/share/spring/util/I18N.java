@@ -2,9 +2,9 @@ package edu.kwon.frmk.common.share.spring.util;
 
 import java.util.Locale;
 
-import org.springframework.context.MessageSource;
+import javax.annotation.PostConstruct;
 
-import edu.kwon.frmk.common.share.spring.context.AppContext;
+import org.springframework.context.MessageSource;
 
 /**
  * I18N Utils which uses the Spring messageSource
@@ -12,19 +12,14 @@ import edu.kwon.frmk.common.share.spring.context.AppContext;
  * @since 0.0.1
  * @version 0.0.1
  */
-public class I18N {
+public final class I18N {
 	
 	private static MessageSource messageSource;
 	private static Locale defaultLocale;
 	
-	private I18N() {}
-	
-	/**
-	 * Init the I18N messageSource and locale
-	 */
-	public static void init() {
-		if (messageSource == null) {
-			messageSource = (MessageSource) AppContext.getBean("messageSource");
+	@PostConstruct
+	public void postConstruct() {
+		if (defaultLocale == null) {
 			defaultLocale = Locale.ENGLISH;
 		}
 	}
@@ -33,12 +28,8 @@ public class I18N {
 	 * Set the locale of the properties to be loaded
 	 * @param locale
 	 */
-	public static void setLocale(Locale locale) {
+	public void setLocale(Locale locale) {
 		I18N.defaultLocale = locale;
-	}
-	
-	public static MessageSource getMessageSource() {
-		return messageSource;
 	}
 	
 	/**
@@ -47,7 +38,7 @@ public class I18N {
 	 * @param sourceMsg The key
 	 * @return The translated value
 	 */
-	public static String string(String sourceMsg) {
+	public String string(String sourceMsg) {
 		if (sourceMsg == null) return null;
 		return getMessageSource().getMessage(sourceMsg, null, defaultLocale);
 	}
@@ -59,7 +50,7 @@ public class I18N {
 	 * @param paramMgs The key params
 	 * @return The translated value
 	 */
-	public static String string(String sourceMsg, String... paramMgs) {
+	public String string(String sourceMsg, String... paramMgs) {
 		if (sourceMsg == null) return null;
 		return getMessageSource().getMessage(sourceMsg, paramMgs, defaultLocale);
 	}
@@ -71,9 +62,25 @@ public class I18N {
 	 * @param paramMgs The key params
 	 * @return The translated value
 	 */
-	public static String string(String sourceMsg, Object... paramMgs) {
+	public String string(String sourceMsg, Object... paramMgs) {
 		if (sourceMsg == null) return null;
 		return getMessageSource().getMessage(sourceMsg, paramMgs, defaultLocale);
+	}
+	
+	/**
+	 * Get MessageSource
+	 * @return
+	 */
+	public MessageSource getMessageSource() {
+		return messageSource;
+	}
+	
+	/**
+	 * Set MessageSource
+	 * @param messageSource
+	 */
+	public void setMessageSource(MessageSource messageSource) {
+		I18N.messageSource = messageSource;
 	}
 
 }
