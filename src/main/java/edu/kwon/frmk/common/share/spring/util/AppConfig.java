@@ -1,6 +1,6 @@
 package edu.kwon.frmk.common.share.spring.util;
 
-import java.util.Properties;
+import org.springframework.core.env.Environment;
 
 import edu.kwon.frmk.common.share.spring.context.AppContext;
 
@@ -16,28 +16,28 @@ import edu.kwon.frmk.common.share.spring.context.AppContext;
  */
 public final class AppConfig {
 	
-	private static Properties pros = AppContext.getBean("pros", Properties.class);
+	private static Environment env = AppContext.getEnvironment();
 	
 	/**
-	 * Get the properties value from the key provided
+	 * Get the configuration properties value from the key provided
 	 * @param key
 	 * 		A key in properties file
 	 * @return
 	 * 		A value in properties file which match the key provided
 	 */
-	public static String getProperties(String key) {
-		return pros.getProperty(key);
+	public static String getConfigValue(String key) {
+		return env.getProperty(key);
 	}
 	
 	/**
-	 * Get the properties value from the key provided. if not found, the default value is used
+	 * Get the configuration properties value from the key provided. if not found, the default value is used
 	 * @param key
 	 * 		A key in properties file
 	 * @return
 	 * 		A value in properties file which match the key provided
 	 */
-	public static String getProperties(String key, String defaultValue) {
-		return pros.getProperty(key, defaultValue);
+	public static String getConfigValue(String key, String defaultValue) {
+		return env.getProperty(key, defaultValue);
 	}
 
 }

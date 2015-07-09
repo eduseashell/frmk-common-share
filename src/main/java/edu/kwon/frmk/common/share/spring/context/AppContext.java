@@ -1,6 +1,7 @@
 package edu.kwon.frmk.common.share.spring.context;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.env.Environment;
 
 public class AppContext {
 	
@@ -25,6 +26,14 @@ public class AppContext {
 	
 	public static <T> T getBean(String name, Class<T> clazz) {
 		return getAppContext().getBean(name, clazz);
+	}
+	
+	/**
+	 * Get Spring Environment
+	 * @return
+	 */
+	public static Environment getEnvironment() {
+		return getAppContext().getEnvironment();
 	}
 	
 	/**
