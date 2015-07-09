@@ -14,7 +14,7 @@ import edu.kwon.frmk.common.share.spring.context.AppContext;
  * @since 0.0.1
  * @version 0.0.1
  */
-public final class AppConfig {
+public class AppConfig {
 	
 	private static Environment env = AppContext.getEnvironment();
 	
@@ -38,6 +38,17 @@ public final class AppConfig {
 	 */
 	public static String getConfigValue(String key, String defaultValue) {
 		return env.getProperty(key, defaultValue);
+	}
+	
+	/**
+	 * Get the configuration properties value from the key provided
+	 * and return the type of the class provided
+	 * @param key
+	 * @param clazz
+	 * @return
+	 */
+	public static <T> T getConfigValue(String key, Class<T> clazz) {
+		return env.getProperty(key, clazz);
 	}
 
 }
