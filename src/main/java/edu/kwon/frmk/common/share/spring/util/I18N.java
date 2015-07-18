@@ -1,5 +1,6 @@
 package edu.kwon.frmk.common.share.spring.util;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
@@ -12,11 +13,15 @@ import org.springframework.context.MessageSource;
  * @since 0.0.1
  * @version 0.0.1
  */
-public final class I18N {
-	
+public final class I18N implements Serializable {
+
+	private static final long serialVersionUID = 6588756159752419122L;
 	private static MessageSource messageSource;
 	private static Locale defaultLocale;
 	
+	/**
+	 * Init default locale
+	 */
 	@PostConstruct
 	public void postConstruct() {
 		if (defaultLocale == null) {
