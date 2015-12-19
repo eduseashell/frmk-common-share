@@ -8,7 +8,7 @@ import edu.kwon.frmk.common.share.spring.context.AppContext;
  * AppConfig: Load the application configuration properties file
  * and provides static method call for getting the value from the key provided
  * or a specific key method.
- * @author Bunlong Taing
+ * @author eduseashell
  *
  * @since Jul 5, 2015
  * @since 0.0.1

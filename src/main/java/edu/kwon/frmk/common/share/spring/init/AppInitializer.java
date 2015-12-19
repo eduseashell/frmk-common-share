@@ -3,7 +3,7 @@ package edu.kwon.frmk.common.share.spring.init;
 /**
  * App Initializer
  * Start up a web app, start init resources here
- * @author Bunlong Taing
+ * @author eduseashell
  * @since 0.0.1
  * @version 0.0.1
  */

@@ -3,37 +3,27 @@ package edu.kwon.frmk.common.share.spring.util;
 import java.io.Serializable;
 import java.util.Locale;
 
-import javax.annotation.PostConstruct;
+import org.springframework.context.ApplicationContext;
 
-import org.springframework.context.MessageSource;
+import edu.kwon.frmk.common.share.spring.context.AppContext;
 
 /**
  * I18N Utils which uses the Spring messageSource
- * @author Bunlong Taing
+ * @author eduseashell
  * @since 0.0.1
  * @version 0.0.1
  */
 public final class I18N implements Serializable {
 
 	private static final long serialVersionUID = 6588756159752419122L;
-	private static MessageSource messageSource;
-	private static Locale defaultLocale;
-	
-	/**
-	 * Init default locale
-	 */
-	@PostConstruct
-	public void postConstruct() {
-		if (defaultLocale == null) {
-			defaultLocale = Locale.ENGLISH;
-		}
-	}
+//	private static MessageSource messageSource;
+	private static Locale defaultLocale;		// TODO i18n locale
 	
 	/**
 	 * Set the locale of the properties to be loaded
 	 * @param locale
 	 */
-	public void setLocale(Locale locale) {
+	public static void setLocale(Locale locale) {
 		I18N.defaultLocale = locale;
 	}
 	
@@ -43,9 +33,9 @@ public final class I18N implements Serializable {
 	 * @param sourceMsg The key
 	 * @return The translated value
 	 */
-	public String string(String sourceMsg) {
+	public static String string(String sourceMsg) {
 		if (sourceMsg == null) return null;
-		return getMessageSource().getMessage(sourceMsg, null, defaultLocale);
+		return getAppContext().getMessage(sourceMsg, null, defaultLocale);
 	}
 	
 	/**
@@ -55,9 +45,9 @@ public final class I18N implements Serializable {
 	 * @param paramMgs The key params
 	 * @return The translated value
 	 */
-	public String string(String sourceMsg, String... paramMgs) {
+	public static String string(String sourceMsg, String... paramMgs) {
 		if (sourceMsg == null) return null;
-		return getMessageSource().getMessage(sourceMsg, paramMgs, defaultLocale);
+		return getAppContext().getMessage(sourceMsg, paramMgs, defaultLocale);
 	}
 	
 	/**
@@ -67,25 +57,13 @@ public final class I18N implements Serializable {
 	 * @param paramMgs The key params
 	 * @return The translated value
 	 */
-	public String string(String sourceMsg, Object... paramMgs) {
+	public static String string(String sourceMsg, Object... paramMgs) {
 		if (sourceMsg == null) return null;
-		return getMessageSource().getMessage(sourceMsg, paramMgs, defaultLocale);
+		return getAppContext().getMessage(sourceMsg, paramMgs, defaultLocale);
 	}
 	
-	/**
-	 * Get MessageSource
-	 * @return
-	 */
-	public MessageSource getMessageSource() {
-		return messageSource;
-	}
-	
-	/**
-	 * Set MessageSource
-	 * @param messageSource
-	 */
-	public void setMessageSource(MessageSource messageSource) {
-		I18N.messageSource = messageSource;
+	private static ApplicationContext getAppContext() {
+		return AppContext.getAppContext();
 	}
 
 }
