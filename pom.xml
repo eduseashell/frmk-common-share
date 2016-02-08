@@ -10,6 +10,7 @@
 	<properties>
 		<spring-framework-version>4.1.6.RELEASE</spring-framework-version>
 		<apache-commons-lang3-version>3.4</apache-commons-lang3-version>
+		<apache-commons-validator-version>1.5.0</apache-commons-validator-version>
 		
 		<build-version>1.8</build-version>
 		<build-encoding>UTF-8</build-encoding>
@@ -36,6 +37,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${apache-commons-lang3-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>${apache-commons-validator-version}</version>
 		</dependency>
 
 	</dependencies>
